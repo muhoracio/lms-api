@@ -1,0 +1,7 @@
+.git
+.env
+.vscode/
+node_modules/
+secrets/
+files/
+db/

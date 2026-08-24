@@ -1,0 +1,27 @@
+import { DatabaseSync, type StatementSync } from "node:sqlite";
+
+class Database extends DatabaseSync {
+  private queries: Record<string, StatementSync>;
+  constructor(path: string) {
+    super(path);
+    this.queries = {};
+    this.exec(`
+      PRAGMA foreign_keys = 1;
+      PRAGMA journal_mode = WAL;
+      PRAGMA synchronous = NORMAL;
+
+      PRAGMA cache_size = 2000;
+      PRAGMA busy_timeout = 5000;
+      PRAGMA temp_store = MEMORY;
+    `);
+  }
+  query(sql: string) {
+    // Cache the statement (the query needs to be an static string)
+    if (!this.queries[sql]) {
+      this.queries[sql] = this.prepare(sql);
+    }
+    return this.queries[sql];
+  }
+}
+
+export default Database;

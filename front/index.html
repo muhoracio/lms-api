@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tiny LMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cardo&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>Tiny LMS</h1>
+    <div class="container">
+      <nav data-role="public">
+        <ul>
+          <li><a href="#/login">Login</a></li>
+          <li><a href="#/cadastrar">Criar</a></li>
+        </ul>
+      </nav>
+
+      <nav data-role="user">
+        <ul>
+          <li><a href="#/cursos">Cursos</a></li>
+          <li><a href="#/certificados">Certificados</a></li>
+          <li><a href="#/sair">Sair</a></li>
+        </ul>
+      </nav>
+
+      <nav data-role="admin">
+        <ul>
+          <li><a href="#/criar-curso">Cursos</a></li>
+          <li><a href="#/criar-aula">Aulas</a></li>
+          <li><a href="#/usuarios">Users</a></li>
+          <li><a href="#/sair">Sair</a></li>
+        </ul>
+      </nav>
+
+      <section id="login" data-role="public">
+        <h2>Login</h2>
+        <form>
+          <label for="email">E-mail</label>
+          <input type="email" name="email" id="email" />
+          <label for="password">Senha</label>
+          <input type="password" name="password" id="password" />
+          <div class="split">
+            <button>Login</button>
+            <a href="#/perdeu">Recuperar Senha</a>
+          </div>
+        </form>
+      </section>
+
+      <section id="perdeu" data-role="public">
+        <h2>Recuperar Senha</h2>
+        <form>
+          <label for="email-perdeu">E-mail</label>
+          <input type="email" name="email" id="email-perdeu" />
+          <button>Esqueci minha Senha</button>
+        </form>
+      </section>
+
+      <section id="resetar" data-role="public">
+        <h2>Redefinir Senha</h2>
+        <form>
+          <label for="new_password">Senha</label>
+          <input type="password" name="new_password" id="new_password" />
+          <input type="hidden" name="token" id="token" />
+          <button>Redefinir minha Senha</button>
+        </form>
+      </section>
+
+      <section id="cadastrar" data-role="public">
+        <h2>Criar Conta</h2>
+        <form>
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" />
+          <label for="email-criar">E-mail</label>
+          <input type="email" name="email" id="email-criar" />
+          <label for="name">Nome</label>
+          <input type="text" name="name" id="name" />
+          <label for="password-criar">Senha</label>
+          <input type="password" name="password" id="password-criar" />
+          <button>Criar Conta</button>
+        </form>
+      </section>
+
+      <section id="criar-curso" data-role="admin">
+        <div class="render"></div>
+        <form>
+          <input type="hidden" name="id" id="id" />
+          <label for="slug">Slug</label>
+          <input type="text" name="slug" id="slug" />
+          <label for="title">Título</label>
+          <input type="text" name="title" id="title" />
+          <label for="description">Descrição</label>
+          <input type="text" name="description" id="description" />
+          <label for="lessons">Aulas</label>
+          <input type="number" name="lessons" id="lessons" />
+          <label for="hours">Horas</label>
+          <input type="number" name="hours" id="hours" />
+          <div class="row">
+            <button>Criar/Atualizar Curso</button>
+            <button class="hidden delete-button" data-url="/lms/course">
+              Deletar Curso
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section id="criar-aula" data-role="admin">
+        <div class="render"></div>
+        <form>
+          <input type="hidden" name="id" id="id" />
+          <label for="course-slug">Curso Slug</label>
+          <input type="text" name="courseSlug" id="course-slug" />
+          <label for="lesson-slug">Slug</label>
+          <input type="text" name="slug" id="lesson-slug" />
+          <label for="lesson-title">Título</label>
+          <input type="text" name="title" id="lesson-title" />
+          <label for="lesson-description">Descrição</label>
+          <input type="text" name="description" id="lesson-description" />
+          <label for="seconds">Segundos</label>
+          <input type="number" name="seconds" id="seconds" />
+          <label for="order">Ordem</label>
+          <input type="number" name="order" id="order" />
+          <label for="free">Gratuita</label>
+          <input type="number" name="free" id="free" value="0" />
+          <label for="file">Vídeo</label>
+          <input type="file" name="file" id="file" />
+          <label for="video">Vídeo Path</label>
+          <input type="text" name="video" id="video-path" />
+          <div class="row">
+            <button>Criar/Atualizar Aula</button>
+            <button class="hidden delete-button" data-url="/lms/lesson">
+              Deletar Aula
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section id="cursos" data-role="user">
+        <div class="render"></div>
+      </section>
+
+      <section id="curso" data-role="user">
+        <div class="render"></div>
+      </section>
+
+      <section id="aula" data-role="user">
+        <div class="render"></div>
+      </section>
+
+      <section id="certificados" data-role="user">
+        <div class="render"></div>
+      </section>
+
+      <section id="usuarios" data-role="admin">
+        <form>
+          <label for="s">Buscar:</label>
+          <input type="text" name="s" id="s" />
+          <label for="page">Página:</label>
+          <input type="number" name="page" id="page" value="1" />
+          <button class="hidden">Buscar</button>
+        </form>
+        <div class="render"></div>
+      </section>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
