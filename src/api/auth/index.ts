@@ -7,18 +7,18 @@ import {
   ValidationError,
 } from "../../core/utils/errors.js";
 import v from "../../core/utils/validate.js";
-import { PASSWORD_PEPPER } from "../../env.js";
 import AuthMiddleware from "./middleware/auth.js";
 import AuthQuery from "./query.js";
 import SessionService, { COOKIE_SID_KEY } from "./services/session.js";
 import { tables } from "./tables.js";
 import Password from "./utils/password.js";
+import { PEPPER } from "../../env.js";
 
 class AuthApi extends Api {
   query = new AuthQuery(this.db);
   session = new SessionService(this.core);
   auth = new AuthMiddleware(this.core);
-  pass = new Password(PASSWORD_PEPPER);
+  pass = new Password(PEPPER);
   handlers = {
     postUser: async (req, res) => {
       const { name, username, email, password } = {

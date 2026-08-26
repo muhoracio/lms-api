@@ -8,6 +8,12 @@ services:
       - files:/files
     env_file:
       - .env
+    secrets:
+      - email_key
+      - pepper
+    environment:
+      EMAIL_KEY_FILE: /run/secrets/email_key
+      PEPPER_FILE: /run/secrets/pepper
     logging:
       driver: local
       options:
@@ -43,3 +49,9 @@ volumes:
   files:
   caddy_data:
   caddy_config:
+
+secrets:
+  email_key:
+    file: ./secrets/email_key.txt
+  pepper:
+    file: ./secrets/pepper.txt

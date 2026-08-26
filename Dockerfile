@@ -1,8 +1,8 @@
 FROM node:24-alpine AS base
 WORKDIR /app
 RUN apk --no-cache add vips-tools sqlite
-COPY seed/files /files/
-COPY seed/db /db/
+COPY ./src/seed/files /files/
+COPY ./src/seed/db /db/
 
 FROM base AS dev
 ENV NODE_ENV=development
