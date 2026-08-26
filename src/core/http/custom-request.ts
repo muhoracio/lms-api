@@ -20,7 +20,7 @@ function getIp(ip: string | string[] | undefined): string {
   return "";
 }
 
-export default async function customRequest(request: IncomingMessage) {
+export default function customRequest(request: IncomingMessage) {
   const req = request as CustomRequest;
   req.baseurl = `https://${SERVER_NAME}`;
 
@@ -35,6 +35,10 @@ export default async function customRequest(request: IncomingMessage) {
   req.session = null;
 
   req.ip = getIp(req.headers["x-forwarded-for"]);
+
+  if (req.method === "HEAD") {
+    req.method = "GET";
+  }
 
   return req;
 }

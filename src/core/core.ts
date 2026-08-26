@@ -34,9 +34,8 @@ class Core {
   }
   handler: RequestListener = async (request, response) => {
     const res = customResponse(response);
+    const req = customRequest(request);
     try {
-      const req = await customRequest(request);
-
       for (const middleware of this.router.middlewares) {
         await middleware(req, res);
       }

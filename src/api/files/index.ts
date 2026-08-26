@@ -111,7 +111,11 @@ class FilesApi extends Api {
       this.auth.guard("user"),
       this.handlers.privateFile,
     );
-    this.router.post("/files/upload", this.handlers.uploadFile);
+    this.router.post(
+      "/files/upload",
+      this.auth.guard("admin"),
+      this.handlers.uploadFile,
+    );
   }
 }
 
