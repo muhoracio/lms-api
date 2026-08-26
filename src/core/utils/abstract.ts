@@ -5,10 +5,12 @@ export abstract class CoreProvider {
   protected core: Core;
   protected router: Core["router"];
   protected db: Core["db"];
+  protected mail: Core["mail"];
   constructor(core: Core) {
     this.core = core;
     this.router = core.router;
     this.db = core.db;
+    this.mail = core.mail;
   }
 }
 

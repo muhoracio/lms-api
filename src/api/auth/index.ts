@@ -2,6 +2,7 @@ import rateLimit from "../../core/middleware/rate-limit.js";
 import { Api } from "../../core/utils/abstract.js";
 import {
   ConflictError,
+  InternalServerError,
   NotFoundError,
   UnauthorizedError,
   ValidationError,
@@ -170,10 +171,16 @@ class AuthApi extends Api {
 
       const mailContent = {
         to: user.email,
-        subject: "Password Reset",
+        subject: "Resetar Senha",
         body: `Utilize o link abaixo para resetar a sua senha: \r\n ${resetLink}`,
       };
-      console.log(mailContent);
+
+      const { ok } = await this.mail.send(mailContent);
+      if (!ok) {
+        throw new InternalServerError({
+          message: "Erro ao enviar e-mail.",
+        });
+      }
 
       return res.status(200).json({ title: "Verifique seu e-mail." });
     },

@@ -17,17 +17,20 @@ import {
   UnsupportedMediaTypeError,
   ValidationError,
 } from "./utils/errors.js";
-import { DB_PATH } from "../env.js";
+import { DB_PATH, EMAIL_KEY } from "../env.js";
+import { Mail } from "./mail/mail.js";
 
 class Core {
   router: Router;
   server: Server;
   db: Database;
+  mail: Mail;
   constructor() {
     this.router = new Router();
     this.router.use(bodyJson);
     this.db = new Database(DB_PATH);
     this.server = createServer(this.handler);
+    this.mail = new Mail(EMAIL_KEY);
   }
   handler: RequestListener = async (request, response) => {
     const res = customResponse(response);

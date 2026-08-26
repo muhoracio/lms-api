@@ -57,6 +57,8 @@ src/
 │   │   ├── body-json.ts      #   Streaming JSON parser with Content-Length + incremental size caps
 │   │   ├── rate-limit.ts     #   Fixed-window limiter (IETF RateLimit fields headers)
 │   │   └── logger.ts
+│   ├── mail/
+│   │   └── mail.ts           #   Resend API wrapper: transactional email delivery
 │   └── utils/
 │       ├── errors.ts         #   HTTP error classes with toJSON() (problem+json)
 │       ├── validate.ts       #   Sanitizers/validators: string, number, email, cpf, password, file…
@@ -97,7 +99,7 @@ src/
 - Login issuing opaque session cookies bound to IP + User-Agent metadata
 - Session validation with **sliding expiration** (15-day TTL, refreshed within the final 5 days)
 - Logout (single session) and **global invalidation** on password change
-- Forgot / reset password flow with single-use, 30-minute expiring tokens (stored hashed)
+- Forgot / reset password flow with single-use, 30-minute expiring tokens (stored hashed) and email delivery via Resend API
 - Admin-only paginated user search (`LIKE` search + `X-Total-Count` pagination header)
 
 ### 🎓 LMS
